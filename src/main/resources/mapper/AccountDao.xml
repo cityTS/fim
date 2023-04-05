@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.fim.dao.AccountDao">
+    <select id="selectAccounts" resultType="com.example.fim.domain.Account">
+        select account
+        from accounts
+        where status = false
+        limit #{num};
+    </select>
+    <select id="selectLatestAccount" resultType="java.lang.Long">
+        select MAX(account)
+        from accounts;
+    </select>
+    <select id="insertAccount">
+        insert into accounts(account) value (#{account});
+    </select>
+    <update id="updateAccount">
+        update accounts
+        set status = true
+        where account = #{account}
+    </update>
+</mapper>

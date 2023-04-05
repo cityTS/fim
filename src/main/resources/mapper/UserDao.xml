@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.fim.dao.UserDao">
+    <insert id="insertUser">
+        insert into user(user_account, user_password, username, user_phone, user_email, created_at)
+            value (#{userAccount}, #{userPassword}, #{username}, #{userPhone}, #{userEmail}, #{createdAt})
+    </insert>
+    <select id="selectUserExact" resultType="com.example.fim.domain.User">
+        select *
+        from user
+        <where>
+            <if test="userAccount != null">
+                and user_account=#{userAccount}
+            </if>
+            <if test="userPassword != null">
+                and user_password=#{userPassword}
+            </if>
+            <if test="username != null">
+                and username=#{username}
+            </if>
+            <if test="userPhone != null">
+                and user_phone=#{userPhone}
+            </if>
+            <if test="userEmail != null">
+                and user_email=#{userEmail}
+            </if>
+        </where>
+    </select>
+    <select id="selectUserRough" resultType="com.example.fim.domain.User">
+        select *
+        from user
+        <where>
+            <if test="userAccount != null">
+                or user_account=#{userAccount}
+            </if>
+            <if test="userPassword != null">
+                or user_password=#{userPassword}
+            </if>
+            <if test="username != null">
+                or username=#{username}
+            </if>
+            <if test="userPhone != null">
+                or user_phone=#{userPhone}
+            </if>
+            <if test="userEmail != null">
+                or user_email=#{userEmail}
+            </if>
+        </where>
+    </select>
+</mapper>

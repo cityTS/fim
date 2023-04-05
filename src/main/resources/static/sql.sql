@@ -12,7 +12,8 @@ CREATE TABLE IF NOT EXISTS `user`
     `user_sex`      CHAR(1)      NOT NULL COMMENT '用户性别' DEFAULT '男',
     `user_birth`    BIGINT       NOT NULL                    DEFAULT 1672502400 COMMENT '用户生日',
     `user_frozen`   BOOL         NOT NULL                    DEFAULT FALSE COMMENT '账号状态',
-    `created_at`    BIGINT       NOT NULL COMMENT '创建时间'
+    `created_at`    BIGINT       NOT NULL COMMENT '创建时间',
+    `avatar_url`    VARCHAR(255) NOT NULL                    DEFAULT 'https://picx.zhimg.com/80/v2-2e1641a8fb38884c8b185ee293d5ae12_720w.webp?source=1940ef5c' COMMENT '头像链接'
 ) ENGINE = InnoDB COMMENT '用户模型'
   DEFAULT CHARSET = utf8;
 
@@ -70,12 +71,19 @@ CREATE TABLE IF NOT EXISTS `admin`
 
 CREATE TABLE IF NOT EXISTS `apply`
 (
-    `id`             INTEGER  PRIMARY KEY COMMENT '申请ID',
+    `id`             INTEGER PRIMARY KEY COMMENT '申请ID',
     `sponsor_id`     BIGINT  NOT NULL COMMENT '发起用户id',
     `recipient_id`   BIGINT  NOT NULL COMMENT '被申请者id',
-    `recipient_type` char(2)     NOT NULL COMMENT '被申请者是用户还是群 用户、群',
+    `recipient_type` char(2) NOT NULL COMMENT '被申请者是用户还是群 用户、群',
     `sponsor_time`   BIGINT  NOT NULL COMMENT '发起时间',
-    `sponsor_status` INTEGER  NOT NULL DEFAULT 2 COMMENT '请求状态：0:拒绝，1:同意2:未处理',
-    FOREIGN KEY (sponsor_id) REFERENCES user(user_account)
+    `sponsor_status` INTEGER NOT NULL DEFAULT 2 COMMENT '请求状态：0:拒绝，1:同意2:未处理',
+    FOREIGN KEY (sponsor_id) REFERENCES user (user_account)
 ) ENGINE = InnoDB COMMENT '申请模型'
+  DEFAULT CHARSET = utf8;
+
+CREATE TABLE IF NOT EXISTS `accounts`
+(
+    `account` BIGINT NOT NULL COMMENT '账号',
+    `status`  BOOL   NOT NULL DEFAULT false COMMENT '该账号的状态'
+) ENGINE = InnoDB COMMENT '账号库'
   DEFAULT CHARSET = utf8;
