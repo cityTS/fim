@@ -48,4 +48,12 @@
             </if>
         </where>
     </select>
+    <select id="selectUserBasicInfo" resultType="com.example.fim.domain.User">
+        select username, user_account, avatar_url
+        from user
+        where (user_account = #{str}
+            or user_phone = #{str}
+            or user_email = #{str})
+          and user_frozen = false
+    </select>
 </mapper>

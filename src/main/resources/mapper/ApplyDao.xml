@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.fim.dao.ApplyDao">
+    <select id="selectUntreatedApply" resultType="com.example.fim.domain.Apply">
+        select sponsor_status
+        from apply
+        where sponsor_status = 2
+            and sponsor_id=#{sponsorId}
+            and recipient_id=#{recipientId}
+    </select>
+    <insert id="insertApply">
+        insert into apply(sponsor_id, recipient_id, sponsor_time)
+            VALUE(#{sponsorId}, #{recipientId}, #{sponsorTime})
+    </insert>
+</mapper>

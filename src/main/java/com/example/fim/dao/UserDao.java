@@ -23,4 +23,11 @@ public interface UserDao {
      */
     List<User> selectUserRough(User user);
 
+    /**
+     * 查询用户的基本信息（对外可查看的）
+     * @param str
+     * @return
+     */
+    List<User> selectUserBasicInfo(String str);
+
 }

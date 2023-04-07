@@ -6,6 +6,8 @@ import com.example.fim.utils.AccountUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
     @Autowired
@@ -29,5 +31,13 @@ public class UserService {
      */
     public Boolean exitUser(User user) {
         return !userDao.selectUserExact(user).isEmpty();
+    }
+
+    public User queryUserBasicInfo(String str) {
+        List<User> users = userDao.selectUserBasicInfo(str);
+        if(users.isEmpty()) {
+            return null;
+        }
+        return users.get(0);
     }
 }
