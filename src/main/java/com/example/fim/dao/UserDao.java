@@ -30,4 +30,6 @@ public interface UserDao {
      */
     List<User> selectUserBasicInfo(String str);
 
+    Integer updateUserInfo(User user);
+
 }

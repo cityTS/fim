@@ -76,4 +76,30 @@ public class UserController {
         }
         return new Re(1, null, "发生了未知错误");
     }
+
+    @GetMapping("/avatar")
+    public Re queryAvatarUrl(String userId) {
+        User user = userService.queryUserBasicInfo(userId);
+        if(user != null) {
+            return new Re(0, user.getAvatarUrl(), "查询成功");
+        }
+        return new Re(1, null, "查无此用户");
+    }
+
+    @GetMapping("/update")
+    public Re updateUser(String avatarUrl, String username, String password, Long userAccount) {
+        User user = new User();
+        user.setAvatarUrl(avatarUrl);
+        user.setUserAccount(userAccount);
+        user.setUsername(username);
+        if(password != null && password.equals("")) {
+            password = null;
+        }
+        user.setUserPassword(password);
+        if(userService.updateUser(user)) {
+            return new Re(0, null, "更新成功");
+        }
+        return new Re(1, null, "更新失败");
+    }
+
 }

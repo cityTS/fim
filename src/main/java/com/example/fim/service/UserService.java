@@ -33,11 +33,31 @@ public class UserService {
         return !userDao.selectUserExact(user).isEmpty();
     }
 
+    /**
+     * 查询用户基本信息
+     * @param str
+     * @return
+     */
     public User queryUserBasicInfo(String str) {
         List<User> users = userDao.selectUserBasicInfo(str);
         if(users.isEmpty()) {
             return null;
         }
         return users.get(0);
+    }
+
+    /**
+     * 精准查找
+     * @param user
+     * @return
+     */
+    public User accurateSearch(User user) {
+        List<User> users = userDao.selectUserExact(user);
+        if(users.isEmpty()) return null;
+        return users.get(0);
+    }
+
+    public Boolean updateUser(User user) {
+        return userDao.updateUserInfo(user) >= 1;
     }
 }

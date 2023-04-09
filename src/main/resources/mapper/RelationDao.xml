@@ -9,4 +9,16 @@
           and friend_id = #{friendId}
           and strange_time is null
     </select>
+    <select id="selectUserFriends" resultType="com.example.fim.domain.Relation">
+        select *
+        from relation
+        where user_id = #{userId}
+          and strange_time is null
+    </select>
+
+    <insert id="insertFriend">
+        insert into
+            relation(user_id, friend_id, relationship_time)
+            VALUE (#{userid}, #{friendId}, #{relationshipTime})
+    </insert>
 </mapper>

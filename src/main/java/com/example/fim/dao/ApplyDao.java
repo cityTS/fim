@@ -11,4 +11,8 @@ public interface ApplyDao {
     List<Apply> selectUntreatedApply(Apply apply);
 
     Integer insertApply(Apply apply);
+
+    List<Apply> selectApplyList(Apply apply);
+
+    Integer updateApplyStatus(Apply apply);
 }

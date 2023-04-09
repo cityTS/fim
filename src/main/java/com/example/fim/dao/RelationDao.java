@@ -7,5 +7,19 @@ import java.util.List;
 
 @Mapper
 public interface RelationDao {
+    /**
+     * 查询关系是否存在
+     * @param relation
+     * @return
+     */
     List<Relation> selectExitRelation(Relation relation);
+
+    /**
+     * 查询用户的好友
+     * @param relation
+     * @return
+     */
+    List<Relation> selectUserFriends(Relation relation);
+
+    Integer insertFriend(Relation relation);
 }

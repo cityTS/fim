@@ -50,4 +50,9 @@ public class User {
      * 用户头像
      */
     private String avatarUrl;
+
+    public void clearSensitiveInformation() {
+        userPassword = userPhone = userEmail = null;
+        userFrozen = null;
+    }
 }

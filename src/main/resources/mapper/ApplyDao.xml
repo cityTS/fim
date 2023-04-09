@@ -13,4 +13,17 @@
         insert into apply(sponsor_id, recipient_id, sponsor_time)
             VALUE(#{sponsorId}, #{recipientId}, #{sponsorTime})
     </insert>
+    <select id="selectApplyList" resultType="com.example.fim.domain.Apply">
+        select *
+        from apply
+        where recipient_id=#{recipientId}
+            and sponsor_status = 2
+    </select>
+
+    <update id="updateApplyStatus">
+        update apply
+        set sponsor_status=#{sponsorStatus}
+        where recipient_id = #{recipientId}
+          and sponsor_id = #{sponsorId}
+    </update>
 </mapper>

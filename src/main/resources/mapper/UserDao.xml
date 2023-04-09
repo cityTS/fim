@@ -56,4 +56,19 @@
             or user_email = #{str})
           and user_frozen = false
     </select>
+    <update id="updateUserInfo">
+        update user
+        <set>
+            <if test="username != null">
+                username = #{username},
+            </if>
+            <if test="userPassword != null">
+                user_password = #{userPassword},
+            </if>
+            <if test="avatarUrl != null">
+                avatar_url = #{avatarUrl},
+            </if>
+        </set>
+        where user_account=#{userAccount}
+    </update>
 </mapper>

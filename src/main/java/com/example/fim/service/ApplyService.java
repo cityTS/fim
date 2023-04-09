@@ -2,6 +2,7 @@ package com.example.fim.service;
 
 import com.example.fim.dao.ApplyDao;
 import com.example.fim.domain.Apply;
+import com.example.fim.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +29,13 @@ public class ApplyService {
     public Boolean addFriend(Apply apply) {
         apply.setSponsorTime(System.currentTimeMillis() / 1000);
         return applyDao.insertApply(apply) == 1;
+    }
+
+    public List<Apply> queryApplyList(Apply apply) {
+        return applyDao.selectApplyList(apply);
+    }
+
+    public Boolean updateApplyStatus(Apply apply) {
+        return applyDao.updateApplyStatus(apply) >= 1;
     }
 }
