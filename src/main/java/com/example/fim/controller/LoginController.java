@@ -21,7 +21,7 @@ public class LoginController {
     @GetMapping("/getCode/{phone}")
     public Re getCode(@PathVariable String phone) throws IOException {
         String s = HttpClientUtils.get("http://43.139.136.169:10025/api/get_message/?phone=" + phone);
-        CodeUtil.setCode(s, phone);
+        CodeUtil.setCode(phone, s);
         return new Re(0, null, "已发送验证码");
     }
 
@@ -33,7 +33,7 @@ public class LoginController {
      */
     @PostMapping("/signup/{code}")
     public Re registeredUsers(@RequestBody User user, @PathVariable String code) {
-        if(!CodeUtil.isOk(code, user.getUserPhone())) {
+        if(!CodeUtil.isOk(user.getUserPhone(), code)) {
             return new Re(1, null, "验证码不正确");
         }
         if(userService.AddUser(user)) {
@@ -53,7 +53,7 @@ public class LoginController {
         user.setUserPhone(phone);
         if(userService.exitUser(user)) {
             String s = HttpClientUtils.get("http://43.139.136.169:10025/api/get_message/?phone=" + phone);
-            CodeUtil.setCode(s, phone);
+            CodeUtil.setCode(phone, s);
             return new Re(0, null, "已发送验证码");
         }
         return new Re(1, null, "该手机号还未注册");
@@ -67,7 +67,7 @@ public class LoginController {
      */
     @GetMapping("/signin/phone")
     public Re signInByPhone(String phone, String code) {
-        if(!CodeUtil.isOk(code, phone)) {
+        if(!CodeUtil.isOk(phone, code)) {
             return new Re(1, null, "验证码不正确");
         }
         User user = new User();
