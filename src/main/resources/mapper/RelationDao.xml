@@ -21,4 +21,9 @@
             relation(user_id, friend_id, relationship_time)
             VALUE (#{userid}, #{friendId}, #{relationshipTime})
     </insert>
+    <update id="deleteFriend">
+        update relation
+        set relation.strange_time = #{now}
+        where (user_id=#{id1} and friend_id=#{id2}) or (user_id=#{id1} and friend_id=#{id2})
+    </update>
 </mapper>

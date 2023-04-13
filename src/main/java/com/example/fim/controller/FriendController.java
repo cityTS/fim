@@ -28,4 +28,12 @@ public class FriendController {
         relation.setUserId(userId);
         return new Re(0, relationService.queryUserFriends(relation), "查询成功");
     }
+
+    @GetMapping("/delete")
+    public Re deleteUserFriend(Long userId, Long friendId) {
+        if(relationService.removeFriend(userId, friendId, System.currentTimeMillis() / 1000)) {
+            return new Re(0, null, "删除成功");
+        }
+        return new Re(1, null, "删除失败");
+    }
 }

@@ -22,4 +22,6 @@ public interface RelationDao {
     List<Relation> selectUserFriends(Relation relation);
 
     Integer insertFriend(Relation relation);
+
+    Integer deleteFriend(Long id1, Long id2, Long now);
 }

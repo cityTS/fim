@@ -53,4 +53,8 @@ public class RelationService {
     public Boolean addFriend(Relation relation) {
         return relationDao.insertFriend(relation) == 1;
     }
+
+    public Boolean removeFriend(Long id1, Long id2, Long now) {
+        return relationDao.deleteFriend(id1, id2, now) >= 1;
+    }
 }
